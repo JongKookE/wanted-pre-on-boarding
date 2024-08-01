@@ -12,7 +12,7 @@ public class UserEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String userEmail;
 
     @Column(nullable = false)
