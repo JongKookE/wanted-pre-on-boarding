@@ -3,7 +3,7 @@ package com.example.wantedpreonboarding.user.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity
+@Entity(name = "users")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
