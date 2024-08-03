@@ -1,9 +1,6 @@
 package com.example.wantedpreonboarding.user.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.wantedpreonboarding.user.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,4 +16,14 @@ public class UserDto {
     private String userPassword;
     private String userName;
     private String userPhoneNumber;
+
+    public UserEntity toEntity(UserDto userDto){
+        return UserEntity.builder()
+                .userId(userDto.getUserId())
+                .userEmail(userDto.getUserEmail())
+                .userPassword(userDto.getUserPassword())
+                .userName(userDto.getUserName())
+                .userPhoneNumber(userDto.getUserPhoneNumber())
+            .build();
+    }
 }

@@ -2,6 +2,7 @@ package com.example.wantedpreonboarding.user.service;
 
 import com.example.wantedpreonboarding.user.dto.UserDto;
 import com.example.wantedpreonboarding.user.entity.UserEntity;
+import com.example.wantedpreonboarding.user.repository.CustomUserRepositoryImpl;
 import com.example.wantedpreonboarding.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -20,6 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserDetailsService, UserService {
     private final UserRepository userRepository;
+    private final CustomUserRepositoryImpl customUserRepository;
     private final BCryptPasswordEncoder encoder;
 
     @Override
@@ -60,5 +62,35 @@ public class UserServiceImpl implements UserDetailsService, UserService {
                 .userPhoneNumber(userDto.getUserPhoneNumber())
                 .build());
     }
+
+    @Override
+    public void softDeleteByUserId(long userId) {
+        // TODO username이 아닌 userId로 CustomException 추가하기
+        // user가 없을경우 Exception
+        this.userRepository.findById(userId).orElseThrow(() -> new UsernameNotFoundException(userId + ""));
+        customUserRepository.softDeleteByUserId(userId);
+    }
+
+    @Override
+    public UserDto findByUserName(String username) {
+        return customUserRepository.findByUserName(username).toDto();
+    }
+
+    @Override
+    public List<UserDto> findUserAll() {
+        return customUserRepository.findUserAll()
+                .stream()
+                .map(UserEntity::toDto)
+            .toList();
+    }
+
+    @Override
+    public List<UserDto> findDeletedUser() {
+        return customUserRepository.findDeletedUser()
+                .stream()
+                .map(UserEntity::toDto)
+            .toList();
+    }
+
 
 }

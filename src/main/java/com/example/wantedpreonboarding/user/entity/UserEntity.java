@@ -1,5 +1,6 @@
 package com.example.wantedpreonboarding.user.entity;
 
+import com.example.wantedpreonboarding.user.dto.UserDto;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -39,4 +40,15 @@ public class UserEntity {
     // 삭제된 시간
     @Column
     private LocalDateTime deletedAt;
+
+
+    public UserDto toDto(){
+        return UserDto.builder()
+                .userId(this.getUserId())
+                .userEmail(this.getUserEmail())
+                .userPassword(this.getUserPassword())
+                .userName(this.getUserName())
+                .userPhoneNumber(this.getUserPhoneNumber())
+                .build();
+    }
 }
