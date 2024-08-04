@@ -26,7 +26,6 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
         UserEntity userEntity = this.userRepository.findByUserName(username).orElseThrow(
                 () -> new UsernameNotFoundException(username)
         );
@@ -34,12 +33,11 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         UserDto userDto = UserDto.builder()
                 .userName(userEntity.getUserName())
                 .userPassword(userEntity.getUserPassword())
-                .build();
+            .build();
 
         List<GrantedAuthority> authorities = new ArrayList<>();
-        return userDto == null ? null : new User(userDto.getUserName(), userDto.getUserPassword(), authorities);
+        return new User(userDto.getUserName(), userDto.getUserPassword(), authorities);
     }
-
 
     @Override
     public UserDto findByUserEmail(String email) {
@@ -91,6 +89,4 @@ public class UserServiceImpl implements UserDetailsService, UserService {
                 .map(UserEntity::toDto)
             .toList();
     }
-
-
 }
