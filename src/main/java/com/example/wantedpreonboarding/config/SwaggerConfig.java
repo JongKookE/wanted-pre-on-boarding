@@ -6,8 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 
 @OpenAPIDefinition(
-        info = @Info(title = "시나브로의 API 명세서",
-                description = "팀 HP50입니다.",
+        info = @Info(title = "원티드 프리 온 보딩",
+                description = "포트폴리오 프로젝트",
                 version = "v1")
 )
 @RequiredArgsConstructor
