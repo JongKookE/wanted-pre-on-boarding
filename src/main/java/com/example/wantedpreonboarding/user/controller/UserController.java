@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Tag(name = "User", description = "초기 테스트")
+@Tag(name = "User", description = "사용자 관련 API")
 @Slf4j
 @RestController
 @RequiredArgsConstructor

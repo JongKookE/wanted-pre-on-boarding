@@ -1,14 +1,18 @@
 package com.example.wantedpreonboarding.user.entity;
 
+import com.example.wantedpreonboarding.post.entity.PostEntity;
 import com.example.wantedpreonboarding.user.dto.UserDto;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity(name = "users")
+@EntityListeners(AuditingEntityListener.class)
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,6 +32,9 @@ public class UserEntity {
 
     @Column(nullable = false)
     private String userPhoneNumber;
+
+    @OneToMany(mappedBy = "userEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<PostEntity> posts;
 
     // 최초 생성 시간
     @CreatedDate
