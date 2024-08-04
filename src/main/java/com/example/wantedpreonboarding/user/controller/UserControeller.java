@@ -3,13 +3,14 @@ package com.example.wantedpreonboarding.user.controller;
 import com.example.wantedpreonboarding.user.dto.UserDto;
 import com.example.wantedpreonboarding.user.entity.UserEntity;
 import com.example.wantedpreonboarding.user.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
+@Tag(name = "User", description = "초기 테스트")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/users")
