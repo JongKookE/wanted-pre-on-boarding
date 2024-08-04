@@ -30,7 +30,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         // swagger를 호출시 자동으로 v3/api-docs/swagger-config로 변환하면서 swagger를 제공해줌
                         // swagger-ui를 통해서 스웨거에 접속하고 변환하는 url인 v3 또한 허용해줘야 시큐리티에서 통과시켜줌
-                        .requestMatchers("/api/users/**", "/v3/**", "/swagger-ui/**").permitAll()
+                        .requestMatchers("/api/**", "/v3/**", "/swagger-ui/**").permitAll()
+//                                .requestMatchers("/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(Customizer.withDefaults())

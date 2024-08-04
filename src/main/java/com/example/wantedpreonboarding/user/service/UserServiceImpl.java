@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
                 .build();
 
         List<GrantedAuthority> authorities = new ArrayList<>();
-        return userDto == null ? null : new User(userDto.getUserEmail(), userDto.getUserPassword(), authorities);
+        return userDto == null ? null : new User(userDto.getUserName(), userDto.getUserPassword(), authorities);
     }
 
 
@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
                 .userEmail(userEntity.getUserEmail())
                 .userPassword(userEntity.getUserPassword())
                 .userPhoneNumber(userEntity.getUserPhoneNumber())
-                .build();
+            .build();
     }
 
     @Override
@@ -58,9 +58,9 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         return this.userRepository.save(UserEntity.builder()
                 .userName(userDto.getUserName())
                 .userEmail(userDto.getUserEmail())
-                .userPassword(userDto.getUserPassword())
+                .userPassword(encoder.encode(userDto.getUserPassword()))
                 .userPhoneNumber(userDto.getUserPhoneNumber())
-                .build());
+            .build());
     }
 
     @Override
