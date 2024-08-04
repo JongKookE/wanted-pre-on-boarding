@@ -23,27 +23,27 @@ public class UserControeller {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/users?name={username}")
+    @GetMapping("/name={username}")
     public ResponseEntity<UserDto> findByName(@PathVariable String username) {
         return ResponseEntity.ok(userService.findByUserName(username));
     }
 
-    @GetMapping("/users?email={userEmail}")
+    @GetMapping("/email={userEmail}")
     public ResponseEntity<UserDto> findByUserEmail(@PathVariable String userEmail) {
         return ResponseEntity.ok(userService.findByUserEmail(userEmail));
     }
 
-    @GetMapping("/users")
+    @GetMapping
     public ResponseEntity<List<UserDto>> findAll() {
         return ResponseEntity.ok(userService.findUserAll());
     }
 
-    @GetMapping("/users/deleted")
+    @GetMapping("/deleted")
     public ResponseEntity<List<UserDto>> findDeletedAll() {
         return ResponseEntity.ok(userService.findDeletedUser());
     }
 
-    @PostMapping("/users")
+    @PostMapping
     public ResponseEntity<UserDto> save(@RequestBody UserDto userDto) {
         userService.userSave(userDto);
         // TODO 적절한 Response 코드 작성하기
