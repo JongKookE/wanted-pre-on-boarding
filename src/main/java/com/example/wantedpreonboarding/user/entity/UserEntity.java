@@ -48,7 +48,6 @@ public class UserEntity {
     @Column
     private LocalDateTime deletedAt;
 
-
     public UserDto toDto(){
         return UserDto.builder()
                 .userId(this.getUserId())
