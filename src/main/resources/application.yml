@@ -15,6 +15,10 @@ spring:
     properties:
       hibernate:
         format_sql: 'true'
+  jwt:
+    headers: ${JWT_HEADER}
+    secret: ${JWT_SECRET_KEY}
+    token-validity-in-seconds: 8640 # 1일
 
 logging:
   level:
