@@ -17,7 +17,6 @@ import static com.example.wantedpreonboarding.JwtConstant.*;
 @Component
 public class JwtUtil {
     private final SecretKey secretKey;
-    private Object entity;
 
     @Value("${spring.jwt.token-validity-in-seconds}") long expiredTime;
 
@@ -27,24 +26,39 @@ public class JwtUtil {
         secretKey = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), Jwts.SIG.HS256.key().build().getAlgorithm());
     }
 
-    public String generateToken(UserEntity userEntity) {
-        HashMap<String, Object> claims = new HashMap<>();
 
+    /**
+     * long과 String 형식을 반환하는 메소드를 묶어주기 위해서 Object를 사용
+     * 이렇게 마음대로 변환해도 되는지는 의문
+     */
+    public Object getUserField(String token, JwtConstant constant){
+        if(constant == JwtConstant.USERID) return Long.parseLong(this.getTokenClaim(token, constant.getConstant()).toString());
+        return this.getTokenClaim(token, constant.getConstant()).toString();
+    }
+
+    public String generateToken(UserEntity userEntity) {
         return Jwts.builder()
                 .claims(this.parseClaims(userEntity))
                 .issuedAt(new Date(System.currentTimeMillis())) // jwt 발급한 시간
                 .expiration(new Date(System.currentTimeMillis() + expiredTime)) // jwt 만기 시간
                 .signWith(secretKey) // 해당 키로 암호화를 하겠다.
-            .compact(); // jwt 생성
+                .compact(); // jwt 생성
     }
 
 
-    public HashMap<String, Object> parseClaims(UserEntity userEntity){
+    private HashMap<String, Object> parseClaims(UserEntity userEntity){
         HashMap<String, Object> claims = new HashMap<>();
-        claims.put(USEREMAIL.getConstant() ,userEntity.getUserEmail());
         claims.put(USERID.getConstant(), userEntity.getUserId());
+        claims.put(USEREMAIL.getConstant() ,userEntity.getUserEmail());
         claims.put(USERNAME.getConstant(), userEntity.getUserName());
         return claims;
+    }
+
+    private Object getTokenClaim(String token, String claimName){
+        return Jwts.parser().verifyWith(secretKey).build().
+                parseSignedClaims(token).
+                getPayload()
+                .get(claimName, Object.class);
     }
 
 }
