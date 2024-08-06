@@ -1,6 +1,5 @@
-package com.example.wantedpreonboarding.util;
+package com.example.wantedpreonboarding.jwt;
 
-import com.example.wantedpreonboarding.JwtConstant;
 import com.example.wantedpreonboarding.user.entity.UserEntity;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,7 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
 
-import static com.example.wantedpreonboarding.JwtConstant.*;
+import static com.example.wantedpreonboarding.jwt.JwtConstant.*;
 
 @Component
 public class JwtUtil {

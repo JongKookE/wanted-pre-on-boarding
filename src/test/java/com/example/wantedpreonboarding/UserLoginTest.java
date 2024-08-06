@@ -1,9 +1,10 @@
 package com.example.wantedpreonboarding;
 
+import com.example.wantedpreonboarding.jwt.JwtConstant;
 import com.example.wantedpreonboarding.user.entity.UserEntity;
 import com.example.wantedpreonboarding.user.repository.UserRepository;
 import com.example.wantedpreonboarding.user.service.UserServiceImpl;
-import com.example.wantedpreonboarding.util.JwtUtil;
+import com.example.wantedpreonboarding.jwt.JwtUtil;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

@@ -1,4 +1,4 @@
-package com.example.wantedpreonboarding;
+package com.example.wantedpreonboarding.jwt;
 
 import lombok.Getter;
 
